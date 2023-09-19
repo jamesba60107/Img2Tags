@@ -1,0 +1,63 @@
+.file-watcher-zone {
+    display: grid;
+    margin: 0;
+    height: 70vh;
+    min-width: 100%;
+    border: 1px inset #C3C3C3;
+    place-items: center;
+    text-align:center;
+    background-color: #C3C3C3;
+    color: white;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+}
+
+.file-watcher-zone h2 {
+    position: sticky;
+    top: 0;  /* 將其置於容器的頂部 */
+    background-color: #C3C3C3;
+    color: white;
+    z-index: 2;
+    margin: 0;
+    border: 10px solid #C3C3C3;
+    border-left-width: 70px;
+    border-right-width: 70px;
+}
+
+.file-watcher-zone ul {
+    margin-top: 0;
+}
+
+.file-watcher {
+    flex-grow: 1;
+}
+
+#file-list {
+    list-style-type: none; /* 這會移除所有圓點 */
+}
+
+#file-list p {
+    margin: 0;
+}
+
+.button-container {
+    margin-top: 5px;
+    min-width: 100%;
+    display: flex;
+}
+
+.file-watcher-download-button {
+    flex: 6;
+}
+
+.file-watcher-delete-button {
+    margin-left: 5px;
+    flex: 3;
+}
+
+.disabled-button {
+    background-color: rgba(229, 9, 20, 0.5); /* #0078e7 with 50% transparency */
+    color: #a0a0a0; /* Text color */
+    cursor: not-allowed;
+}

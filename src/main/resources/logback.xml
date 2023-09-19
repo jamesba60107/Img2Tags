@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+<!--加這行才會保有指令視窗的預設輸出格式-->
+<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+<property name="LOGS" value="data/log"/>
+<property name="APP_NAME" value="Img2Tags"/>
+
+<appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <encoder charset="UTF-8">
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %C{1}: %msg%n%throwable</Pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>${LOGS}/${APP_NAME}-%d{yyyyMMdd}-%i.log</fileNamePattern>
+        <maxHistory>90</maxHistory>
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>10MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+</appender>
+
+<root level="info">
+    <appender-ref ref="RollingFile"/>
+</root>
+
+</configuration>

@@ -1,0 +1,89 @@
+/*
+font-family: 'Barlow', sans-serif;
+font-family: 'Barlow Condensed', sans-serif;
+font-family: 'Saira Extra Condensed', sans-serif;
+*/
+html {
+    box-sizing: border-box;
+}
+
+html *,
+html *::before,
+html *::after {
+    box-sizing: inherit;
+    padding: 0;
+}
+
+#bodyContainer {
+    margin : 0 50px 0 50px;
+    background-color: white;
+    color: white;
+    font-family: "Saira Extra Condensed", sans-serif;
+}
+
+.floatContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    height: 450px;
+}
+
+.custom-sweetalert-confirm-button {
+    background-color: #e50914 !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.custom-sweetalert-delete-button {
+    background-color: #e50914 !important; /* 紅色背景 */
+    box-shadow: 0 3px 1px -2px red!important;
+    border: none;
+    color: white;  /* 白色文字 */
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 當滑鼠懸停在按鈕上時改變背景顏色 */
+.custom-sweetalert-delete-button:hover {
+     background-color: #cc0000 !important;
+     box-shadow: 0 3px 1px -2px red!important;
+
+}
+
+.custom-sweetalert-cancel-button {
+    background-color: #999898 !important;
+    border: none;
+    color: black; /* 黑色文字 */
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+/* 當滑鼠懸停在按鈕上時改變背景顏色 */
+.custom-sweetalert-cancel-button:hover {
+     background-color: #999999 !important; /* 深灰色 */
+}
+
+.top-nav {
+    background-color: #c71d25;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.button-red {
+    color: white;
+    border-radius: 4px;
+    background: rgb(202, 60, 60);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
