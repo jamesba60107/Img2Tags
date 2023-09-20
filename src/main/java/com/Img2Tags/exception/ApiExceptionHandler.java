@@ -1,12 +1,10 @@
 package com.Img2Tags.exception;
 
 import com.Img2Tags.dto.ApiExceptionDTO;
-import com.Img2Tags.service.api.ImageGetTagsApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,7 +48,7 @@ public class ApiExceptionHandler {
                 errorMessage,
                 timeStamp
         );
-        logger.error(apiException.toString());
+        logger.error(apiException.getMessage());
         return new ResponseEntity<>(apiException, HttpStatus.valueOf(errorCode));
     }
 }

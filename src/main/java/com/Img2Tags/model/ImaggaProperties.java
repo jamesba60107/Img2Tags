@@ -20,8 +20,5 @@ public class ImaggaProperties {
 
     private String authorization;
 
-    private String endpoint;
-
     private String apiUrl;
-
 }

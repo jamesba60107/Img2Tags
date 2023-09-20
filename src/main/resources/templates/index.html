@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="/index/index.css">
-    <link rel="icon" href="/image/favicon.ico" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/index/index.js"></script>
-    <title>index</title>
-</head>
-<body>
-    <div class="top-nav">
-        <h1>生成關鍵字工具</h1>
-    </div>
-    <div id="bodyContainer">
-<!--        <div id="clockContainer"></div>-->
-        <br />
-        <div class="floatContainer">
-            <div th:replace="fragments/fileUpload :: fileUpload"></div>
-            <div th:replace="fragments/fileWatcher :: fileWatcher"></div>
+<html lang="zh-TW">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+        <link rel="stylesheet" href="/index/index.css">
+        <link rel="icon" href="/image/favicon.ico" type="image/x-icon">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/index/index.js"></script>
+        <title>index</title>
+    </head>
+    <body>
+        <div class="top-nav">
+            <h1>生成關鍵字工具</h1>
         </div>
-    </div>
-</body>
+        <div id="bodyContainer">
+            <br />
+            <div class="floatContainer">
+                <div th:replace="fragments/fileUpload :: fileUpload"></div>
+                <div th:replace="fragments/fileWatcher :: fileWatcher"></div>
+            </div>
+        </div>
+    </body>
 </html>

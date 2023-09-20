@@ -110,7 +110,6 @@ function clickDownloadButton() {
             // 在API請求失敗時關閉等待中的SweetAlert2彈出式視窗
             Swal.close();
 
-            //
             let parsedError = JSON.parse(error.responseText);
             let errorTitle = errorMessage(parsedError).errorCodeAndType;
             let errorText = errorMessage(parsedError).errorMessage;

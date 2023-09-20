@@ -12,7 +12,6 @@ import java.util.Base64;
 @Configuration
 public class ImaggaConfig {
 
-
     @Value("${imagga.key}")
     private String key;
 

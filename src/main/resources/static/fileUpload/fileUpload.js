@@ -2,7 +2,6 @@ const drop_zone = document.getElementById('drop-zone');
 const drop_zone_h2 = document.querySelector("#drop-zone h2");
 const fileInput = document.getElementById('fileInput');
 const allowedExtensions = ['jpg', 'jpeg', 'png'];
-
 const uploadedFiles = []; // 存儲已成功上傳的文件
 
 fileInput.addEventListener('change', uploadFiles);
@@ -49,12 +48,10 @@ function showInfoDialog(title, text, timerProgressBar = true) {
 
 async function uploadFiles() {
     showInfoDialog('請稍等', '正在上傳圖片檔案');
-
     const totalFiles = fileInput.files.length;
     let successCount = 0;
     let errorCount = 0;
     const errorMessages = [];
-
     const formData = new FormData();
 
     for (const file of fileInput.files) {
@@ -71,7 +68,6 @@ async function uploadFiles() {
 
     try {
         showInfoDialog('請稍候', '正在上傳檔案至伺服器', false);
-
         const response = await fetch('/batchFileUpload', {
             method: 'POST',
             body: formData

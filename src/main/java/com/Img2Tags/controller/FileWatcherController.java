@@ -3,7 +3,6 @@ package com.Img2Tags.controller;
 import com.Img2Tags.dto.ImageGetTagsApiResponseDTO;
 import com.Img2Tags.exception.ApiRequestException;
 import com.Img2Tags.service.FileWatcherService;
-import com.Img2Tags.service.api.ImageGetTagsApiService;
 import com.Img2Tags.util.CSVFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 
 // 顯示資料夾內圖檔名稱
@@ -29,23 +27,17 @@ import java.util.List;
 @RequestMapping("/fileWatcher")
 public class FileWatcherController {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
     private final FileWatcherService fileWatcherService;
-    private final ImageGetTagsApiService imageGetTagsApiService;
-
     private final CSVFactory csvFactory;
-    private List<String> fileNameData = Collections.singletonList("");
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public FileWatcherController(
             FileWatcherService fileWatcherService,
-            ImageGetTagsApiService imageGetTagsApiService,
             CSVFactory csvFactory ) {
         this.fileWatcherService = fileWatcherService;
-        this.imageGetTagsApiService = imageGetTagsApiService;
         this.csvFactory = csvFactory;
     }
-
 
     // 圖片資料夾路徑
     @Value("${spring.servlet.multipart.location}")
@@ -65,7 +57,7 @@ public class FileWatcherController {
         List<String> fileNameData = getFilenames().getBody();
 
         if (fileNameData == null || fileNameData.isEmpty()) {
-            log.warn("沒有取得檔案名稱資料");
+            logger.warn("沒有取得檔案名稱資料");
             return ResponseEntity.badRequest().body("沒有取得檔案名稱資料");
         }
 

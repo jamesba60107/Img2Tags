@@ -19,7 +19,6 @@ import java.util.List;
 public class FileUploadController {
 
     private final FileUploadService fileUploadService;
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

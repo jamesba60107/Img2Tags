@@ -34,7 +34,6 @@ public class FileUploadService {
         }
 
         StringBuilder responseMessage = new StringBuilder();
-
         for (MultipartFile file : files) {
             try {
                 // 儲存文件

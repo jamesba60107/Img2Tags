@@ -1,5 +1,4 @@
 <div th:fragment="fileUpload" class="file-upload">
-
     <button id="drop-zone" class="drop-zone"
             onclick="document.getElementById('fileInput').click();" >
         <h2>圖檔上傳區</h2>
@@ -9,5 +8,7 @@
     <br/>
     <input type="file" id="fileInput" multiple style="display:none;">
     <button class="pure-button button-red file-input-button"
-            onclick="document.getElementById('fileInput').click();" >選取圖檔路徑</button>
+            onclick="document.getElementById('fileInput').click();" >
+        <img src="/image/icon_upload.png" alt="icon_upload"/>
+        選取圖檔路徑</button>
 </div>
