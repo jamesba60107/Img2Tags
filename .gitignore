@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/data/log/
+/.mvn/
+/src/test/java/com/Img2Tags/Img2TagsApplicationTests.java
