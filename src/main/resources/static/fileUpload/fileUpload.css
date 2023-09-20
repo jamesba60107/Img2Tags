@@ -3,17 +3,17 @@
     min-width: 100%;
     text-align: center;
     color: white;
-    background-color: #C3C3C3;
+    background-color: #999999;
     cursor: grab;
     border: none;
 }
 
 .drop-zone:hover {
-    background-color: #888888;
+    background-color: #838383;
 }
 
 .drop-zone:hover h2 {
-    background-color: #888888;
+    background-color: #838383;
 }
 
 .drop-zone p {
@@ -24,7 +24,7 @@
 .drop-zone h2 {
     position: sticky;
     top: 0;
-    background-color: #C3C3C3;
+    background-color: #999999;
     color: white;
     z-index: 2;
     margin: 0;
