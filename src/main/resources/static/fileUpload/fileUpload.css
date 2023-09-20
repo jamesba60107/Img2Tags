@@ -1,19 +1,35 @@
-#dropzone {
+.drop-zone {
     height: 70vh;
     min-width: 100%;
     text-align: center;
     color: white;
     background-color: #C3C3C3;
     cursor: grab;
+    border: none;
 }
 
-#dropzone:hover {
+.drop-zone:hover {
     background-color: #888888;
 }
 
-#dropzone:hover h2 {
+.drop-zone:hover h2 {
     background-color: #888888;
-    border-color: #888888;
+}
+
+.drop-zone p {
+    margin: 0;
+    color: white;
+}
+
+.drop-zone h2 {
+    position: sticky;
+    top: 0;
+    background-color: #C3C3C3;
+    color: white;
+    z-index: 2;
+    margin: 0;
+    border-left-width: 70px;
+    border-right-width: 70px;
 }
 
 .file-input-button {
@@ -23,20 +39,4 @@
 
 .file-upload {
     flex-grow: 2;
-}
-
-.dropzone p {
-    margin: 0;
-    color: white;
-}
-
-.dropzone h2 {
-    position: sticky;
-    top: 0;
-    background-color: #C3C3C3;
-    color: white;
-    z-index: 2;
-    margin: 0;
-    border-left-width: 70px;
-    border-right-width: 70px;
 }

@@ -1,23 +1,23 @@
-const dropzone = document.getElementById('dropzone');
-const h2Element = document.querySelector("#dropzone h2");
+const drop_zone = document.getElementById('drop-zone');
+const drop_zone_h2 = document.querySelector("#drop-zone h2");
 const fileInput = document.getElementById('fileInput');
 const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
 const uploadedFiles = []; // 存儲已成功上傳的文件
 
 fileInput.addEventListener('change', uploadFiles);
-dropzone.addEventListener('dragover', preventDefault);
-dropzone.addEventListener('drop', handleDrop);
+drop_zone.addEventListener('dragover', preventDefault);
+drop_zone.addEventListener('drop', handleDrop);
 
 // 避免重整頁面時 畫面閃爍 因此增加css延遲轉換設定
 window.onload = function() {
     setTimeout(function() {
-        dropzone.style.transition = 'background-color 0.5s';
+        drop_zone.style.transition = 'background-color 0.5s';
     }, 100); // 延遲 100 毫秒
 
     setTimeout(function() {
-        dropzone.style.transition = 'background-color 0.5s';
-        h2Element.style.transition = 'background-color 0.5s';
+        drop_zone.style.transition = 'background-color 0.5s';
+        drop_zone_h2.style.transition = 'background-color 0.5s';
     }, 100); // 延遲 100 毫秒
 }
 
