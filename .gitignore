@@ -34,3 +34,4 @@ build/
 /data/log/
 /.mvn/
 /src/test/java/com/Img2Tags/Img2TagsApplicationTests.java
+src/main/resources/application.properties
