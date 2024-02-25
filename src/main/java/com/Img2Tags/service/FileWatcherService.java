@@ -50,11 +50,11 @@ public class FileWatcherService {
     }
 
     //串接 Imagga API: tags
-    public List<ImageGetTagsApiResponseDTO> getTagsToImagga(List<String> fileNameData) throws ApiRequestException{
+    public List<ImageGetTagsApiResponseDTO> getTagsToImagga(List<String> fileNameData, String language) throws ApiRequestException{
 
         List<ImageGetTagsApiResponseDTO> resultList;
             resultList = fileNameData.stream()
-                    .map(data -> imageGetTagsApiService.tags(data))
+                    .map(data -> imageGetTagsApiService.tags(data, language))
                     .collect(Collectors.toList());
         return ResponseEntity.ok(resultList).getBody();
     }

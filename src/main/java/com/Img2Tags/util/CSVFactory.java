@@ -1,6 +1,7 @@
 package com.Img2Tags.util;
 
 import com.Img2Tags.dto.ImageGetTagsApiResponseDTO;
+import com.Img2Tags.dto.Tag;
 import org.springframework.stereotype.Component;
 
 import java.io.StringWriter;
@@ -27,10 +28,10 @@ public class CSVFactory {
             writer.write(data.getResult().getImageName());
             for (int i = 0; i < 99; i++) {
                 if (i < data.getResult().getTags().size()) {
-                    ImageGetTagsApiResponseDTO.Tag tag = data.getResult().getTags().get(i);
+                    Tag tag = data.getResult().getTags().get(i);
                     double confidence = tag.getConfidence();
                     String formattedConfidence = decimalFormat.format(confidence);
-                    writer.write("\t" + tag.getTag().getEn() + "\t" + formattedConfidence);
+                    writer.write("\t" + tag.getTag().getTagName() + "\t" + formattedConfidence);
                 } else {
                     writer.write("\t\t");  // 如果沒有資料，則留空
                 }

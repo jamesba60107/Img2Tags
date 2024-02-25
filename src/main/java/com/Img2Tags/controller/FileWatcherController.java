@@ -61,9 +61,10 @@ public class FileWatcherController {
             return ResponseEntity.badRequest().body("沒有取得檔案名稱資料");
         }
 
+        String language = "zh_cht";
         // 串接 Imagga API: /tags
         List<ImageGetTagsApiResponseDTO> getTagsResultList =
-                fileWatcherService.getTagsToImagga(fileNameData);
+                fileWatcherService.getTagsToImagga(fileNameData , language);
 
         // 取得串接 Imagga API: /tags 成功清單
         List<ImageGetTagsApiResponseDTO> tagsSuccessResultList =

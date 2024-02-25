@@ -9,8 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ImageGetTagsApiResponseDTO {
-
-    private Result result;
-    private Status status;
+public class Result {
+    private String imageName;
+    private List<Tag> tags;
 }

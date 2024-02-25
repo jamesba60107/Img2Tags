@@ -21,10 +21,6 @@ public class ImageGetTagsApiService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 定義 HTTP 請求
-    private static final String BOUNDARY = "Image Upload";
-    private static final String CRLF = "\r\n";
-    private static final String TWO_HYPHENS = "--";
-    private static final String TAGS_ENDPOINT = "/tags";
     private final ImaggaConfig imaggaConfig;
     private final JsonConverter jsonConverter;
 
@@ -37,19 +33,20 @@ public class ImageGetTagsApiService {
         this.jsonConverter = jsonConverter;
     }
 
-    public ImageGetTagsApiResponseDTO tags(String imageName) throws ApiRequestException {
-            String basicAuth = imaggaConfig.getAuthorization();
+    public ImageGetTagsApiResponseDTO tags(String imageName, String language) throws ApiRequestException {
 
-            // 上傳圖檔的資料夾路徑 要改
-            File fileToUpload = new File("/Users/bajunsheng/project/DJ_project/UploadFile/" + imageName);
+        String basicAuth = imaggaConfig.getAuthorization();
+        String response = null;
+        // 上傳圖檔的資料夾路徑 要改
+        File fileToUpload = new File("/Users/bajunsheng/project/DJ_project/UploadFile/" + imageName);
 
-            String endpoint = "/tags";
-            String crlf = "\r\n";
-            String twoHyphens = "--";
-            String boundary =  "Image Upload";
-            StringBuilder stringBuilder = new StringBuilder();
-            // 取得Response Code
-            int responseCode = 0;
+        String endpoint = "/tags?language=" + language;
+        String crlf = "\r\n";
+        String twoHyphens = "--";
+        String boundary =  "Image Upload";
+        StringBuilder stringBuilder = new StringBuilder();
+        // 取得Response Code
+        int responseCode = 0;
 
         try {
             URL urlObject = new URL("https://api.imagga.com/v2" + endpoint);
@@ -96,8 +93,10 @@ public class ImageGetTagsApiService {
             }
             responseStreamReader.close();
 
-            String response = stringBuilder.toString();
-            System.out.println(response);
+            response = stringBuilder.toString();
+            // 把回傳 json 的 字串 換成 tagName
+            response = response.replace("\"zh_cht\"", "\"tagName\"");
+            response = response.replace("\"en\"", "\"tagName\"");
 
             responseStream.close();
             connection.disconnect();
@@ -105,15 +104,14 @@ public class ImageGetTagsApiService {
         } catch (IOException e) {
                 throw new ApiRequestException("API請求錯誤", responseCode);
         }
-            // json轉換成java物件
-            ImageGetTagsApiResponseDTO result =
-                    jsonConverter.convertJsonToObj(stringBuilder.toString(), ImageGetTagsApiResponseDTO.class);
-            result.getResult().setImageName(imageName);
+        // json轉換成java物件
+        ImageGetTagsApiResponseDTO result =
+                jsonConverter.convertJsonToObj(response, ImageGetTagsApiResponseDTO.class);
+        result.getResult().setImageName(imageName);
 
-            // 印出回傳log
-            logger.info(result.toString());
+        // 印出回傳log
+        logger.info(result.toString());
 
-            return result;
-
+        return result;
     }
 }
