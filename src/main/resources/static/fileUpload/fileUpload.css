@@ -40,3 +40,21 @@
 .file-upload {
     flex-grow: 2;
 }
+
+.language-switch {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.flag-icon {
+    height: 20px;
+    width: 30px;
+    margin-right: 10px;
+    background-size: cover;
+    vertical-align: middle;
+}
+
+.flag-en { background-image: url('#path_to_english_flag.png'); }
+.flag-zh { background-image: url('#path_to_chinese_flag.png'); }
