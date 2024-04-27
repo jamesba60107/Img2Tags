@@ -12,11 +12,16 @@ public class RabbitMQService {
 
     @Autowired
     private Gson gson;
+
+    private final RabbitTemplate rabbitTemplate;
+
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    public RabbitMQService(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     public void sendImg2TagCSVCompleteToQueue(RabbitMQResponse response) {
         String jsonMessage = gson.toJson(response);
-        rabbitTemplate.convertAndSend(RabbitMQType.IMG2TAGS_CSV, jsonMessage);
+        rabbitTemplate.convertAndSend(RabbitMQType.IMG2TAGSCSV, jsonMessage);
     }
 }

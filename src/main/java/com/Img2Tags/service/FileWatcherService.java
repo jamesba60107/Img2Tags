@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 @Slf4j
 @Service
 public class FileWatcherService {
@@ -76,7 +77,7 @@ public class FileWatcherService {
     }
 
     // 取得upload_id 失敗清單
-    public void tagsFailFilter(List<ImageGetTagsApiResponseDTO> tagsResultList) {
+    public List<ImageGetTagsApiResponseDTO> tagsFailFilter(List<ImageGetTagsApiResponseDTO> tagsResultList) {
 
         List<ImageGetTagsApiResponseDTO> tagsFailResultList =
                 tagsResultList.stream()
@@ -87,6 +88,8 @@ public class FileWatcherService {
             logger.info("串接Imagga API: upload, 失敗數量: " + tagsFailResultList.size());
             logger.info(tagsFailResultList.toString());
         }
+
+        return tagsFailResultList;
     }
 
     public void deleteAllFiles(String directoryPath) throws IOException {
@@ -96,6 +99,7 @@ public class FileWatcherService {
                     try {
                         Files.deleteIfExists(path);
                     } catch (IOException e) {
+                        log.error("刪除檔案失敗: " + e.getMessage());
                         throw new UncheckedIOException(e);
                     }
                  });

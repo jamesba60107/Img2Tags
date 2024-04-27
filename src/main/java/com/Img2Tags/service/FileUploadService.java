@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
+// 前端畫面 上傳的圖片檔案 會透過此Service進行處理
 @Service
 public class FileUploadService {
 

@@ -1,6 +1,7 @@
 package com.Img2Tags.controller;
 
 import com.Img2Tags.dto.ImageGetTagsApiResponseDTO;
+import com.Img2Tags.dto.rabbitMQ.RabbitMQRequest;
 import com.Img2Tags.exception.ApiRequestException;
 import com.Img2Tags.service.FileWatcherService;
 import com.Img2Tags.util.CSVFactory;
@@ -46,36 +47,32 @@ public class FileWatcherController {
     // 取得圖片資料夾下所有圖檔
     @GetMapping("/filenames")
     public ResponseEntity<List<String>> getFilenames() {
-        List<String> fileNames =
-                fileWatcherService.getFilenamesFromDirectory(directoryPath);
+        List<String> fileNames = fileWatcherService
+                .getFilenamesFromDirectory(directoryPath);
         return ResponseEntity.ok(fileNames);
     }
 
     @GetMapping("/imageGetTags")
-    public ResponseEntity<Object> imageGetTags() throws ApiRequestException {
+    public ResponseEntity<Object> imageGetTags(RabbitMQRequest request) throws ApiRequestException {
 
         List<String> fileNameData = getFilenames().getBody();
-
         if (fileNameData == null || fileNameData.isEmpty()) {
             logger.warn("沒有取得檔案名稱資料");
             return ResponseEntity.badRequest().body("沒有取得檔案名稱資料");
         }
-
-        String language = "zh_cht";
+        String language = request.getFilePath();
+        // 提供中英兩種版本
+        language = language == null ? "zh_cht" : language;
         // 串接 Imagga API: /tags
         List<ImageGetTagsApiResponseDTO> getTagsResultList =
                 fileWatcherService.getTagsToImagga(fileNameData , language);
-
         // 取得串接 Imagga API: /tags 成功清單
         List<ImageGetTagsApiResponseDTO> tagsSuccessResultList =
                 fileWatcherService.tagsSuccessFilter(getTagsResultList);
-
         // 取得串接 Imagga API: /tags 失敗清單
         fileWatcherService.tagsFailFilter(getTagsResultList);
-
         //產出CSV檔案
         String csvContent = csvFactory.generateCSVFromDTO(tagsSuccessResultList);
-
         // 設定 headers
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, "text/csv; charset=UTF-8");

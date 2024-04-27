@@ -11,7 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RabbitMQResponse {
 
+    private String requestId;
+    private String language;
     private Integer successCount;
+    private Integer failCount;
     private String csvPath;
-    private String cavName;
+    private String csvName;
 }
