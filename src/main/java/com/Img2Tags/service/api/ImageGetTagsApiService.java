@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Service
@@ -33,12 +34,12 @@ public class ImageGetTagsApiService {
         this.jsonConverter = jsonConverter;
     }
 
-    public ImageGetTagsApiResponseDTO tags(String imageName, String language) throws ApiRequestException {
+    public ImageGetTagsApiResponseDTO tags(String filePath, String imageName, String language) throws ApiRequestException {
 
         String basicAuth = imaggaConfig.getAuthorization();
         String response = null;
         // 上傳圖檔的資料夾路徑 要改
-        File fileToUpload = new File("/Users/bajunsheng/project/DJ_project/UploadFile/" + imageName);
+        File fileToUpload = new File(filePath + imageName);
 
         String endpoint = "/tags?language=" + language;
         String crlf = "\r\n";
@@ -84,7 +85,8 @@ public class ImageGetTagsApiService {
 
             InputStream responseStream = new BufferedInputStream(connection.getInputStream());
 
-            BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
+            BufferedReader responseStreamReader = new BufferedReader(
+                    new InputStreamReader(responseStream, StandardCharsets.UTF_8));
 
             String line = "";
 
@@ -102,7 +104,8 @@ public class ImageGetTagsApiService {
             connection.disconnect();
 
         } catch (IOException e) {
-                throw new ApiRequestException("API請求錯誤", responseCode);
+            System.out.println(e.getMessage());
+            throw new ApiRequestException("API請求錯誤", responseCode);
         }
         // json轉換成java物件
         ImageGetTagsApiResponseDTO result =

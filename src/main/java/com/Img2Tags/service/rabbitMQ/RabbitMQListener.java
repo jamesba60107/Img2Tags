@@ -57,7 +57,9 @@ public class RabbitMQListener {
             String filePath = node.get("filePath").asText();
 
             List<ImageGetTagsApiResponseDTO> getTagsResultList = fileWatcherService.getTagsToImagga(
-                    fileWatcherService.getFilenamesFromDirectory(filePath), language);
+                        filePath,
+                        fileWatcherService.getFilenamesFromDirectory(filePath),
+                        language);
             List<ImageGetTagsApiResponseDTO> tagsSuccessResultList =
                     fileWatcherService.tagsSuccessFilter(getTagsResultList);
             List<ImageGetTagsApiResponseDTO> tagsFailureResultList =
