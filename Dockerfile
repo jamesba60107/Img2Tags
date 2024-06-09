@@ -23,7 +23,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 WORKDIR /app
 
 # 將 Maven 打包的目標 WAR 檔案複製到容器內
-COPY Img2Tags.war /app/Img2Tags.war
+COPY /target/Img2Tags-0.0.1-SNAPSHOT.war /app/Img2Tags.war
 
 # 暴露容器的 8080 端口
 EXPOSE 8080

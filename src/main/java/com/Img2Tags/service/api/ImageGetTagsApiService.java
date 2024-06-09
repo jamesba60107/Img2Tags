@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -24,6 +25,9 @@ public class ImageGetTagsApiService {
     // 定義 HTTP 請求
     private final ImaggaConfig imaggaConfig;
     private final JsonConverter jsonConverter;
+    // 圖片資料夾路徑
+    @Value("${spring.servlet.multipart.location}")
+    private String directoryPath;
 
     public int errorCode = 0;
 
@@ -38,8 +42,10 @@ public class ImageGetTagsApiService {
 
         String basicAuth = imaggaConfig.getAuthorization();
         String response = null;
-        // 上傳圖檔的資料夾路徑 要改
-        File fileToUpload = new File(filePath + imageName);
+        // filePath 如果是null : 代表是本系統前台頁面上傳的, 需補上路徑"/images/"
+        // filePath 如果非null : 代表是rabbit系統傳來的
+        String uploadPath = filePath == null ? directoryPath + imageName : filePath + imageName;
+        File fileToUpload = new File(uploadPath);
 
         String endpoint = "/tags?language=" + language;
         String crlf = "\r\n";
@@ -105,6 +111,7 @@ public class ImageGetTagsApiService {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            logger.error("API request failed with response code: " + responseCode, e);
             throw new ApiRequestException("API請求錯誤", responseCode);
         }
         // json轉換成java物件

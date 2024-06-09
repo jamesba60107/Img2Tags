@@ -1,12 +1,9 @@
 package com.Img2Tags.service.rabbitMQ;
 
 import com.Img2Tags.dto.ImageGetTagsApiResponseDTO;
-import com.Img2Tags.dto.rabbitMQ.RabbitMQRequest;
 import com.Img2Tags.dto.rabbitMQ.RabbitMQResponse;
-import com.Img2Tags.dto.rabbitMQ.RabbitMQType;
 import com.Img2Tags.service.FileWatcherService;
 import com.Img2Tags.util.CSVFactory;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,10 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -44,6 +38,7 @@ public class RabbitMQListener {
     *  "requestId": "123456",
     *  "userId": "78910",
     *  "imageCount": 3,
+    *  “language": "en",
     *  "filePath": "/images/78910/",
     *  "fileName": [ "image1.jpg", "image2.jpg", "image3.jpg" ]
     *}
