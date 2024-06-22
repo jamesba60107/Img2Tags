@@ -47,6 +47,7 @@
 }
 
 .file-watcher-download-button {
+    margin-left: 3px;
     flex: 6;
 }
 

@@ -7,11 +7,17 @@ const status = {
 $(document).ready(function() {
     getFilenameAndUpdate(); // 檢查伺服器資料夾檔案名稱
 
-    //
-    $('#file-watcher-download-button').click(() => {
-        clickDownloadButton();
+    // 下載中文關鍵字
+    $('#file-watcher-ch-download-button').click(() => {
+        clickDownloadButton("zh_cht");
     });
 
+    // 下載英文關鍵字
+    $('#file-watcher-en-download-button').click(() => {
+        clickDownloadButton("en");
+    });
+
+    // 刪除監聽資料夾內所有檔案
     $('#file-watcher-delete-button').click(() => {
         clickDeleteButton();
     });
@@ -57,7 +63,7 @@ function getFilenameAndUpdate() {
     }
 }
 
-function clickDownloadButton() {
+function clickDownloadButton(language) {
     // 點擊按鈕時 才檢查`/fileWatcher/tags` API
     status.checkingTags = true; // 取標籤時 不要檢查檔案名稱
 
@@ -73,7 +79,7 @@ function clickDownloadButton() {
 
     // 把檔案傳傳給後端 由後端串接 imagga Api
     $.ajax({
-        url: '/fileWatcher/imageGetTags',
+        url: `/fileWatcher/imageGetTags?language=${language}`,
         type: 'GET',
         complete: () => {
             // 無論ajax是否成功, 都會執行此處代碼
@@ -88,7 +94,7 @@ function clickDownloadButton() {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = getDate() + '_image_tags.csv';
+                a.download = getDate() + `_${language}_image_tags.csv`;
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
@@ -179,18 +185,21 @@ function clickDeleteButton() {
 
 // 資料夾沒有圖檔時 顯示的預設字串
 function updateEmptyMessageVisibility() {
-    const downloadButton = $('#file-watcher-download-button');
+    const chDownloadButton = $('#file-watcher-ch-download-button');
+    const enDownloadButton = $('#file-watcher-en-download-button');
     const deleteButton = $('#file-watcher-delete-button');
 
     if(!fileList.find('li').length) {
         fileList.append('<p>請先上傳圖檔</p>');
 
         // 禁用按鈕並改變其顏色
-        downloadButton.prop('disabled', true).addClass('disabled-button');
+        chDownloadButton.prop('disabled', true).addClass('disabled-button');
+        enDownloadButton.prop('disabled', true).addClass('disabled-button');
         deleteButton.prop('disabled', true).addClass('disabled-button');
     } else {
         // 如果有檔案，啟用按鈕並移除灰色樣式
-        downloadButton.prop('disabled', false).removeClass('disabled-button');
+        chDownloadButton.prop('disabled', false).removeClass('disabled-button');
+        enDownloadButton.prop('disabled', false).removeClass('disabled-button');
         deleteButton.prop('disabled', false).removeClass('disabled-button');
     }
 }
