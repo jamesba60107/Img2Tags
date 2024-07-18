@@ -50,6 +50,7 @@ public class RabbitMQListener {
             String requestId = node.get("requestId").asText();
             String language = node.has("language") ? node.get("language").asText() : "zh_cht";
             String filePath = node.get("filePath").asText();
+            filePath = filePath.endsWith("/") ? filePath : filePath + "/";
 
             List<ImageGetTagsApiResponseDTO> getTagsResultList = fileWatcherService.getTagsToImagga(
                         filePath,
@@ -70,7 +71,6 @@ public class RabbitMQListener {
             String csvFilePath = filePath + csvName;
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(csvContent);
-                log.info("CSV 檔案已成功寫入到: " + csvFilePath);
 
                 RabbitMQResponse response = new RabbitMQResponse();
                 response.setRequestId(requestId);
@@ -80,9 +80,12 @@ public class RabbitMQListener {
                 response.setCsvName(csvName);
                 response.setCsvPath(filePath);
                 rabbitMQService.sendImg2TagCSVCompleteToQueue(response);
+                log.info("CSV 檔案已成功寫入到: " + csvFilePath);
+            } catch (Exception e) {
+                log.error("寫入CSV時出錯: {}", e.getMessage(), e);
             }
         } catch (Exception e) {
-            log.error("處理消息時出錯: " + e.getMessage(), e);
+            log.error("處理消息時出錯: {}", e.getMessage(), e);
         }
     }
 }

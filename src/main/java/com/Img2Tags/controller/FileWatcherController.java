@@ -60,10 +60,9 @@ public class FileWatcherController {
             logger.warn("沒有取得檔案名稱資料");
             return ResponseEntity.badRequest().body("沒有取得檔案名稱資料");
         }
-        String filePath = request.getFilePath();
-        String language = request.getLanguage();
+        String filePath = request.getFilePath() == null ? directoryPath : request.getFilePath();
         // 提供中英兩種版本
-        language = language == null ? "zh_cht" : language;
+        String language = request.getLanguage() == null ? "zh_cht" : request.getLanguage();
         // 串接 Imagga API: /tags
         List<ImageGetTagsApiResponseDTO> getTagsResultList =
                 fileWatcherService.getTagsToImagga(filePath, fileNameData , language);

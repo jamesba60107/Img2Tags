@@ -25,7 +25,9 @@ docker load -i img2tag.tar
 
 # 運行新的容器
 echo "運行新的容器..."
-docker run -idt --name img2tag --network="host" -e RABBITMQ_HOST=192.168.2.232 -e RABBITMQ_PORT=5672 -e RABBITMQ_USER=james -e RABBITMQ_PASSWORD=Imagedj89684152 -v /var/www/html/rabbit/uploads:/app/uploads -v /var/www/Img2Tag/log:/app/data/log img2tag:latest
+docker run -idt --name img2tag --network="host" -e RABBITMQ_HOST=192.168.2.232 -e RABBITMQ_PORT=5672 -e RABBITMQ_USER=james -e RABBITMQ_PASSWORD=Imagedj89684152 -v /var/www/html/idj_AMS/uploads:/uploads -v /var/www/Img2Tag/log:/app/data/log img2tag:latest
+
+
 
 # 清理不需要的 Docker 映像和容器
 echo "清理 Docker..."
