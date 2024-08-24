@@ -46,9 +46,11 @@ public class RabbitMQListener {
     @RabbitListener(queues = "IDJ")
     public void receiveMessage(String message) {
         try {
+            log.info("從RabbitMQ接收到的message: {}", message);
             JsonNode node = mapper.readTree(message);
-            String requestId = node.get("requestId").asText();
+            String requestId = node.has("requestId") ? node.get("requestId").asText() : "未接收到requestId";
             String language = node.has("language") ? node.get("language").asText() : "zh_cht";
+            String userId = node.has("userId") ? node.get("userId").asText() : "未接收到userId";
             String filePath = node.get("filePath").asText();
             filePath = filePath.endsWith("/") ? filePath : filePath + "/";
 
@@ -75,6 +77,7 @@ public class RabbitMQListener {
                 RabbitMQResponse response = new RabbitMQResponse();
                 response.setRequestId(requestId);
                 response.setLanguage(language);
+                response.setUserId(userId);
                 response.setSuccessCount(tagsSuccessResultList.size());
                 response.setFailCount(tagsFailureResultList.size());
                 response.setCsvName(csvName);

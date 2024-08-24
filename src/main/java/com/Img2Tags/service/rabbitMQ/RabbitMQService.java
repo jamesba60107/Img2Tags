@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class RabbitMQService {
 
@@ -22,6 +23,7 @@ public class RabbitMQService {
     }
 
     public void sendImg2TagCSVCompleteToQueue(RabbitMQResponse response) {
+        log.info("發送message至RabbitMQ: {}", response);
         String jsonMessage = gson.toJson(response);
         rabbitTemplate.convertAndSend(RabbitMQType.IMG2TAGSCSV, jsonMessage);
     }

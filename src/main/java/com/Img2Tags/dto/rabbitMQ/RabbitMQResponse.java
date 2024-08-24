@@ -13,6 +13,7 @@ public class RabbitMQResponse {
 
     private String requestId;
     private String language;
+    private String userId;
     private Integer successCount;
     private Integer failCount;
     private String csvPath;
