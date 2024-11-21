@@ -32,6 +32,7 @@ public class RabbitMQListener {
         this.fileWatcherService = fileWatcherService;
         this.rabbitMQService = rabbitMQService;
     }
+
     /**
     *example message:
     *{
